@@ -1,6 +1,10 @@
-def main():
-    print("Hello from be!")
+from flask import Flask
 
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return {"message": "Il Backend della libreria funziona!"}
 
 if __name__ == "__main__":
-    main()
+    app.run(debug=True)
