@@ -1,10 +1,10 @@
-from flask import Flask
+from flask import Flask, jsonify, request
+from flask_cors import CORS  # Importa CORS
+from faker import Faker
 
 app = Flask(__name__)
+CORS(app)  # Abilita CORS per tutte le rotte
 
-@app.route("/")
-def home():
-    return {"message": "Il Backend della libreria funziona!"}
+fake = Faker('it_IT')
 
-if __name__ == "__main__":
-    app.run(debug=True)
+# Qui andrà la logica per generare i 20 libri e le rotte...
