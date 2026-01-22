@@ -1,16 +1,16 @@
 :root {
   --bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   --card: #ffffff;
-  --primary: #4facfe;
-  --secondary: #00f2fe;
+  --primary: #667eea;
+  --secondary: #764ba2;
   --danger: #ff6b6b;
   --success: #51cf66;
   --muted: #868e96;
   --text: #212529;
-  --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  --radius: 12px;
-  --gap: 1rem;
-  --transition: all 0.3s ease;
+  --shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  --radius: 16px; /* Larger radius */
+  --gap: 1.5rem; /* Larger gap */
+  --transition: all 0.4s ease; /* Smoother transition */
 }
 
 * { box-sizing: border-box; }
@@ -21,17 +21,18 @@ body {
   color: var(--text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 /* App container */
 .app {
-  max-width: 1200px;
-  margin: 2rem auto;
-  padding: 2rem;
+  width: 100%; /* Full width */
+  min-height: 100vh;
+  margin: 0;
+  padding: 0; /* Remove padding for full coverage */
   background: rgba(255, 255, 255, 0.95);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  border-radius: 0;
+  box-shadow: none;
   backdrop-filter: blur(10px);
 }
 
@@ -39,41 +40,43 @@ body {
 .app-header {
   text-align: center;
   margin-bottom: 2rem;
-  padding: 1rem;
+  padding: 2rem 3rem; /* More padding for full width */
   background: linear-gradient(45deg, var(--primary), var(--secondary));
   color: white;
-  border-radius: var(--radius);
+  border-radius: 0;
   box-shadow: var(--shadow);
 }
 .app-header h1 {
   margin: 0;
-  font-size: 2.5rem;
+  font-size: 3rem; /* Larger title */
   font-weight: 700;
 }
 .subtitle {
   margin: 0.5rem 0 0;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   opacity: 0.9;
 }
 
 /* Controls */
 .controls {
   display: flex;
-  flex-direction: column; /* Changed to column for better balance */
+  flex-direction: column;
   gap: var(--gap);
   margin-bottom: 2rem;
+  padding: 0 3rem; /* Horizontal padding */
 }
 
 .card {
   background: var(--card);
   border-radius: var(--radius);
-  padding: 1rem; /* Reduced padding */
+  padding: 1.5rem; /* Slightly more padding */
   box-shadow: var(--shadow);
   transition: var(--transition);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  transform: translateY(-8px) scale(1.02); /* More pronounced hover */
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
 }
 
 .form {
@@ -98,19 +101,20 @@ body {
 }
 
 .btn {
-  padding: 0.75rem 1.5rem;
+  padding: 0.8rem 1.8rem;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
   font-weight: 600;
-  font-size: 0.9rem; /* Slightly smaller for fit */
+  font-size: 0.95rem;
   transition: var(--transition);
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 .btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 .btn.primary { background: linear-gradient(45deg, var(--primary), var(--secondary)); color: white; }
 .btn.secondary { background: #6c757d; color: white; }
@@ -130,6 +134,7 @@ body {
 /* Main */
 main {
   margin-bottom: 2rem;
+  padding: 0 3rem;
 }
 
 .count {
@@ -152,130 +157,86 @@ main {
   align-items: center;
   gap: 1rem;
   transition: var(--transition);
+  animation: fadeIn 0.5s ease-in-out;
 }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}book-info {
 .book-card:hover {
-  transform: scale(1.03); /* Slightly more scale */
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2);
-}
-.book-info {
-  flex: 1;
-}
-.book-title {
-  margin: 0 0 0.5rem 0;
-  font-size: 1rem; /* Smaller font */
+  transform: scale(1.05);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+}0;
+.book-title {/* Smaller font */
+  margin: 0 0 0.5rem 0; color: var(--text);
+  font-size: 1.1rem;t: 600;
   color: var(--text);
-  font-weight: 600;
+  font-weight: 700;
 }
-.book-meta {
-  margin: 0;
-  font-size: 0.8rem; /* Smaller font */
+.book-meta { font-size: 0.8rem; /* Smaller font */
+  margin: 0;  color: var(--muted);
+  font-size: 0.85rem;
   color: var(--muted);
-}
-
-.book-actions {
-  display: flex;
+  font-weight: 500;
+};
+lly in cards */
+.book-actions { gap: 0.25rem;
+  display: flex;  min-width: 120px; /* Ensure space for buttons */
   flex-direction: column; /* Stack buttons vertically in cards */
   gap: 0.25rem;
-  min-width: 120px; /* Ensure space for buttons */
+  min-width: 120px; /* Ensure space for buttons */enter;
 }
-
-/* Loading */
-.loading {
-  text-align: center;
-  padding: 3rem;
+spinner {
+/* Loading */0px;
+.loading {;
+  text-align: center;olid #f3f3f3;
+  padding: 3rem;--primary);
 }
-.spinner {
-  width: 50px;
+.spinner {linear infinite; border-radius: 50%;
+  width: 50px;nite;
   height: 50px;
-  border: 5px solid #f3f3f3;
-  border-top: 5px solid var(--primary);
-  border-radius: 50%;
+  border: 5px solid #f3f3f3;keyframes spin {
+  border-top: 5px solid var(--primary); rotate(0deg); }keyframes spin {
+  border-radius: 50%;); }  0% { transform: rotate(0deg); }
   animation: spin 1s linear infinite;
   margin: 0 auto 1rem;
-}
+}/* Empty */
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-/* Empty */
+  0% { transform: rotate(0deg); }olumn: 1 / -1;
+  100% { transform: rotate(360deg); }/ -1;
+};;
+: var(--muted);
+/* Empty */rem;  padding: 2rem;
 .empty {
   grid-column: 1 / -1;
-  text-align: center;
+  text-align: center;/* Footer */
   color: var(--muted);
-  padding: 2rem;
-  font-size: 1.1rem;
-}
+  padding: 2rem;ign: center;
+  font-size: 1.1rem;;
+}gradient(45deg, var(--secondary), var(--primary));
 
-/* Footer */
-.footer {
+/* Footer */: var(--radius); color: white;
+.footer {;  border-radius: 0;
   text-align: center;
-  padding: 1rem;
-  background: linear-gradient(45deg, var(--secondary), var(--primary));
-  color: white;
-  border-radius: var(--radius);
-  font-size: 0.9rem;
-}
-
-/* Responsive */
-@media (max-width: 1200px) {
-  .book-list { grid-template-columns: repeat(4, 1fr); } /* 4 columns */
-}
+  padding: 2rem 3rem;
+  background: linear-gradient(45deg, var(--secondary), var(--primary));/* Responsive */
+  color: white;h: 1200px) {* Responsive */
+  border-radius: 0;-columns: repeat(4, 1fr); } /* 4 columns */{
+  font-size: 1rem;
+}media (max-width: 920px) {
+e-columns: repeat(3, 1fr); } /* 3 columns */
+/* Responsive */ } /* Already column, ensure */
+@media (max-width: 1200px) {; }
+  .book-list { grid-template-columns: repeat(4, 1fr); } /* 4 columns */: column; align-items: stretch; } main { padding: 0 1rem; }
+}rem; }rem; }
 @media (max-width: 920px) {
-  .book-list { grid-template-columns: repeat(3, 1fr); } /* 3 columns */
-  .controls { flex-direction: column; } /* Already column, ensure */
-  .form { flex-direction: column; }
-  .filters { flex-direction: column; align-items: stretch; }
-  .app { padding: 1rem; margin: 1rem; }
-}
-@media (max-width: 768px) {
-  /* Adjustments for smaller screens */  .book-list { grid-template-columns: repeat(2, 1fr); } /* 2 columns */
-  .book-list { grid-template-columns: 1fr; } /* Stacked cards */}
+  .app-header { padding: 1.5rem 2rem; }
+  .controls { padding: 0 2rem; }
+  main { padding: 0 2rem; }
+  .footer { padding: 1.5rem 2rem; }
+  .app-header h1 { font-size: 2.5rem; }  .app-header {    padding: 1rem 0.5rem;  }  .controls {    padding: 0 0.5rem;  }  main {    padding: 0 0.5rem;  }  .footer {    padding: 1rem 0.5rem;  }}@media (max-width: 520px) {  .book-list { grid-template-columns: 1fr; } /* 1 column */  .book-actions { flex-direction: row; gap: 0.5rem; } /* Horizontal on very small screens */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}  }    font-size: 0.7rem; /* Consistent meta size */  .book-meta {  }    font-size: 1rem; /* Consistent title size */  .book-title {  }    padding: 0.4rem;    font-size: 0.85rem; /* Even smaller input/select */  .input, .select {  }    padding: 0.4rem 0.8rem;    font-size: 0.75rem; /* Even smaller buttons */  .btn {  }    margin: 0.5rem;    padding: 0.5rem;  .app {  /* Further adjustments for very small screens */@media (max-width: 576px) {}  }    font-size: 0.75rem; /* Smaller meta */  .book-meta {  }    font-size: 1.1rem; /* Slightly larger title */  .book-title {  }    padding: 0.5rem;    font-size: 0.9rem; /* Smaller input/select */  .input, .select {  }    padding: 0.5rem 1rem;    font-size: 0.8rem; /* Smaller buttons */  .btn {  }    padding: 0.75rem; /* Reduced padding for smaller screens */  .card {  .app { padding: 0.5rem; margin: 0.5rem; }@media (max-width: 520px) {
-  .book-list { grid-template-columns: 1fr; } /* 1 column */
-  .book-actions { flex-direction: row; gap: 0.5rem; } /* Horizontal on very small screens */ .filters { flex-direction: column; align-items: stretch; }
-  .btn { font-size: 0.8rem; padding: 0.4rem 0.8rem; }}
+  .book-list { grid-template-columns: repeat(3, 1fr); } /* 3 columns */  .controls { flex-direction: column; } /* Already column, ensure */  .form { flex-direction: column; }  .filters { flex-direction: column; align-items: stretch; }  .app { padding: 1rem; margin: 1rem; }}@media (max-width: 768px) {  /* Adjustments for smaller screens */  .book-list { grid-template-columns: repeat(2, 1fr); } /* 2 columns */  .book-list { grid-template-columns: 1fr; } /* Stacked cards */}@media (max-width: 576px) {  .app {  /* Further adjustments for very small screens */    padding: 0.5rem;    margin: 0.5rem;  }  .book-meta {    font-size: 0.7rem; /* Consistent meta size */  }  .book-title {    font-size: 1rem; /* Consistent title size */  }  .input, .select {    padding: 0.4rem;    font-size: 0.85rem; /* Even smaller input/select */  }  .btn {    font-size: 0.75rem; /* Even smaller buttons */    padding: 0.4rem 0.8rem;  }  .filters { flex-direction: column; align-items: stretch; }
+  .btn { font-size: 0.8rem; padding: 0.4rem 0.8rem; }
 }
 
