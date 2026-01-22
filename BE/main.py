@@ -78,5 +78,24 @@ def delete_all_libri():
     libri = []
     return jsonify({"deleted_all": True}), 200
 
+@app.route('/api/libri/<int:book_id>', methods=['PUT'])
+def update_libro(book_id):
+    data = request.get_json() or {}
+    titolo = data.get('titolo')
+    autore = data.get('autore')
+    anno = data.get('anno')
+    genere = data.get('genere')
+    if not titolo or not autore or not anno or not genere:
+        return jsonify({"error": "campi mancanti"}), 400
+    try:
+        anno = int(anno)
+    except (ValueError, TypeError):
+        return jsonify({"error": "anno non valido"}), 400
+    for b in libri:
+        if b['id'] == book_id:
+            b.update({"titolo": titolo, "autore": autore, "anno": anno, "genere": genere})
+            return jsonify(b), 200
+    return jsonify({"error": "non trovato"}), 404
+
 if __name__ == '__main__':
     app.run(debug=True)

@@ -7,8 +7,12 @@ export default function App() {
   const [libri, setLibri] = useState([])
   const [loading, setLoading] = useState(false)
   const [filterAuthor, setFilterAuthor] = useState('')
+  const [filterTitle, setFilterTitle] = useState('')
   const [filterGenre, setFilterGenre] = useState('')
+  const [sortBy, setSortBy] = useState('')
   const [form, setForm] = useState({ titolo: '', autore: '', anno: '', genere: '' })
+  const [editing, setEditing] = useState(null)
+  const [editForm, setEditForm] = useState({ titolo: '', autore: '', anno: '', genere: '' })
 
   useEffect(() => { fetchLibri() }, [])
 
@@ -38,6 +42,22 @@ export default function App() {
     } catch (e) { console.error(e) }
   }
 
+  async function updateLibro(id, updated) {
+    try {
+      const res = await fetch(`${API}/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updated)
+      })
+      if (res.ok) {
+        const updatedBook = await res.json()
+        setLibri(prev => prev.map(b => b.id === id ? updatedBook : b))
+        setEditing(null)
+        setEditForm({ titolo: '', autore: '', anno: '', genere: '' })
+      }
+    } catch (e) { console.error(e) }
+  }
+
   async function deleteLibro(id) {
     try {
       const res = await fetch(`${API}/${id}`, { method: 'DELETE' })
@@ -53,61 +73,89 @@ export default function App() {
     } catch (e) { console.error(e) }
   }
 
+  function resetFilters() {
+    setFilterAuthor('')
+    setFilterTitle('')
+    setFilterGenre('')
+    setSortBy('')
+  }
+
   const genres = Array.from(new Set(libri.map(b => b.genere))).sort()
-  const filtered = libri.filter(b =>
-    b.autore.toLowerCase().includes(filterAuthor.toLowerCase()) &&
-    (filterGenre ? b.genere === filterGenre : true)
-  )
+  const filtered = libri
+    .filter(b =>
+      b.autore.toLowerCase().includes(filterAuthor.toLowerCase()) &&
+      b.titolo.toLowerCase().includes(filterTitle.toLowerCase()) &&
+      (filterGenre ? b.genere === filterGenre : true)
+    )
+    .sort((a, b) => {
+      if (sortBy === 'titolo') return a.titolo.localeCompare(b.titolo)
+      if (sortBy === 'anno') return a.anno - b.anno
+      return 0
+    })
 
   return (
     <div className="app">
       <header className="app-header">
-        <h1>Gestione Libreria</h1>
-        <p className="subtitle">React + Flask — semplice CRUD</p>
+        <h1>📚 Gestione Libreria</h1>
+        <p className="subtitle">React + Flask — CRUD Completo e Bello</p>
       </header>
 
       <section className="controls">
-        <form className="form" onSubmit={addLibro}>
-          <input placeholder="Titolo" value={form.titolo} onChange={e => setForm({ ...form, titolo: e.target.value })} />
-          <input placeholder="Autore" value={form.autore} onChange={e => setForm({ ...form, autore: e.target.value })} />
-          <input placeholder="Anno" value={form.anno} onChange={e => setForm({ ...form, anno: e.target.value })} />
-          <input placeholder="Genere" value={form.genere} onChange={e => setForm({ ...form, genere: e.target.value })} />
-          <button type="submit" className="btn primary">Aggiungi</button>
-          <button type="button" className="btn danger" onClick={clearLibrary}>Svuota</button>
+        <form className="form card" onSubmit={editing ? (e) => { e.preventDefault(); updateLibro(editing, editForm) } : addLibro}>
+          <input className="input" placeholder="📖 Titolo" value={editing ? editForm.titolo : form.titolo} onChange={e => editing ? setEditForm({ ...editForm, titolo: e.target.value }) : setForm({ ...form, titolo: e.target.value })} required />
+          <input className="input" placeholder="👤 Autore" value={editing ? editForm.autore : form.autore} onChange={e => editing ? setEditForm({ ...editForm, autore: e.target.value }) : setForm({ ...form, autore: e.target.value })} required />
+          <input className="input" type="number" placeholder="📅 Anno" value={editing ? editForm.anno : form.anno} onChange={e => editing ? setEditForm({ ...editForm, anno: e.target.value }) : setForm({ ...form, anno: e.target.value })} required />
+          <input className="input" placeholder="🎭 Genere" value={editing ? editForm.genere : form.genere} onChange={e => editing ? setEditForm({ ...editForm, genere: e.target.value }) : setForm({ ...form, genere: e.target.value })} required />
+          <button type="submit" className="btn primary">{editing ? '✨ Aggiorna' : '➕ Aggiungi'}</button>
+          {editing && <button type="button" className="btn secondary" onClick={() => { setEditing(null); setEditForm({ titolo: '', autore: '', anno: '', genere: '' }) }}>❌ Annulla</button>}
+          <button type="button" className="btn danger" onClick={clearLibrary}>🗑️ Svuota Libreria</button>
         </form>
 
-        <div className="filters">
-          <input placeholder="Cerca autore..." value={filterAuthor} onChange={e => setFilterAuthor(e.target.value)} />
-          <select value={filterGenre} onChange={e => setFilterGenre(e.target.value)}>
-            <option value="">Tutti i generi</option>
+        <div className="filters card">
+          <input className="input" placeholder="🔍 Cerca autore..." value={filterAuthor} onChange={e => setFilterAuthor(e.target.value)} />
+          <input className="input" placeholder="🔍 Cerca titolo..." value={filterTitle} onChange={e => setFilterTitle(e.target.value)} />
+          <select className="select" value={filterGenre} onChange={e => setFilterGenre(e.target.value)}>
+            <option value="">📚 Tutti i generi</option>
             {genres.map(g => <option key={g} value={g}>{g}</option>)}
           </select>
+          <select className="select" value={sortBy} onChange={e => setSortBy(e.target.value)}>
+            <option value="">🔀 Nessun ordinamento</option>
+            <option value="titolo">📝 Ordina per titolo</option>
+            <option value="anno">📅 Ordina per anno</option>
+          </select>
+          <button className="btn reset" onClick={resetFilters}>🔄 Reset Filtri</button>
         </div>
       </section>
 
       <main>
-        {loading ? <p>Caricamento...</p> : (
+        {loading ? (
+          <div className="loading">
+            <div className="spinner"></div>
+            <p>Caricamento libri...</p>
+          </div>
+        ) : (
           <>
-            <p className="count">Libri trovati: {filtered.length}</p>
+            <p className="count">📊 Libri trovati: {filtered.length}</p>
             <div className="book-list">
               {filtered.map(b => (
-                <article className="book-card" key={b.id}>
-                  <div>
-                    <h3>{b.titolo}</h3>
-                    <p className="meta">{b.autore} — {b.anno} • <em>{b.genere}</em></p>
+                <article className="book-card card" key={b.id}>
+                  <div className="book-info">
+                    <h3 className="book-title">{b.titolo}</h3>
+                    <p className="book-meta">👤 {b.autore} — 📅 {b.anno} • 🎭 <em>{b.genere}</em></p>
                   </div>
                   <div className="book-actions">
-                    <button className="btn" onClick={() => deleteLibro(b.id)}>Elimina</button>
+                    <button className="btn edit" onClick={() => { setEditing(b.id); setEditForm({ titolo: b.titolo, autore: b.autore, anno: b.anno, genere: b.genere }) }}>✏️ Modifica</button>
+                    <button className="btn delete" onClick={() => deleteLibro(b.id)}>🗑️ Elimina</button>
                   </div>
                 </article>
               ))}
-              {filtered.length === 0 && <p className="empty">Nessun libro da mostrare.</p>}
+              {filtered.length === 0 && <p className="empty">📭 Nessun libro trovato con i filtri applicati.</p>}
             </div>
           </>
         )}
       </main>
 
-      <footer className="footer">Progetto Libreria • React + Flask</footer>
+      <footer className="footer">📖 Progetto Libreria • React + Flask • Creato con ❤️</footer>
     </div>
   )
 }
