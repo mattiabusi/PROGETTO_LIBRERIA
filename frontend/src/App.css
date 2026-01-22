@@ -59,16 +59,15 @@ body {
 /* Controls */
 .controls {
   display: flex;
+  flex-direction: column; /* Changed to column for better balance */
   gap: var(--gap);
-  flex-wrap: wrap;
-  justify-content: space-between;
   margin-bottom: 2rem;
 }
 
 .card {
   background: var(--card);
   border-radius: var(--radius);
-  padding: 1.5rem;
+  padding: 2rem; /* Increased padding for better look */
   box-shadow: var(--shadow);
   transition: var(--transition);
 }
@@ -104,7 +103,7 @@ body {
   border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 0.9rem; /* Slightly smaller for fit */
   transition: var(--transition);
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -143,7 +142,7 @@ main {
 
 .book-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); /* Larger cards */
   gap: var(--gap);
 }
 
@@ -155,7 +154,8 @@ main {
   transition: var(--transition);
 }
 .book-card:hover {
-  transform: scale(1.02);
+  transform: scale(1.03); /* Slightly more scale */
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2);
 }
 .book-info {
   flex: 1;
@@ -174,7 +174,9 @@ main {
 
 .book-actions {
   display: flex;
-  gap: 0.5rem;
+  flex-direction: column; /* Stack buttons vertically in cards */
+  gap: 0.25rem;
+  min-width: 120px; /* Ensure space for buttons */
 }
 
 /* Loading */
@@ -217,13 +219,14 @@ main {
 
 /* Responsive */
 @media (max-width: 920px) {
-  .form { flex: 1 1 100%; }
-  .filters { flex: 1 1 100%; justify-content: flex-start; }
+  .controls { flex-direction: column; } /* Already column, ensure */
+  .form { flex-direction: column; }
+  .filters { flex-direction: column; align-items: stretch; }
   .app { padding: 1rem; margin: 1rem; }
 }
 @media (max-width: 520px) {
   .book-list { grid-template-columns: 1fr; }
-  .form { flex-direction: column; }
-  .btn { width: 100%; }
-  .filters { flex-direction: column; align-items: stretch; }
+  .book-actions { flex-direction: row; gap: 0.5rem; } /* Horizontal on very small screens */ .filters { flex-direction: column; align-items: stretch; }
+  .btn { font-size: 0.8rem; padding: 0.4rem 0.8rem; }}
 }
+
