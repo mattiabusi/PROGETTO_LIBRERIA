@@ -52,7 +52,7 @@ Come Amministratore, voglio poter eliminare un libro inserito per errore o svuot
 Backend: Python, Flask, Faker (per la generazione dati).
 
 
-Frontend: React (Vite), Axios (per le chiamate API), Hooks (useState, useEffect).
+Frontend: React (Vite), Hooks (useState, useEffect).
 
 
 Tooling: Git per il versionamento.
