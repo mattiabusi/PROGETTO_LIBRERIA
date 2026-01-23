@@ -36,3 +36,26 @@ Protocollo di Comunicazione: Utilizzo di standard REST per lo scambio dati in fo
 
 
 Versionamento: Codice sorgente gestito interamente tramite Git e caricato su GitHub.
+
+👤 User Stories
+
+Come Bibliotecario, voglio vedere una lista di libri pre-caricati all'avvio per testare subito le funzionalità del sistema.
+
+
+Come Utente, voglio poter filtrare i libri per genere così da trovare rapidamente i titoli di mio interesse.
+
+
+Come Amministratore, voglio poter eliminare un libro inserito per errore o svuotare la lista per aggiornare il catalogo.
+
+🚀 Tecnologie Utilizzate
+
+Backend: Python, Flask, Faker (per la generazione dati).
+
+
+Frontend: React (Vite), Axios (per le chiamate API), Hooks (useState, useEffect).
+
+
+Tooling: Git per il versionamento.
+
+📂 Struttura delle API 
+(Endpoint)MetodoEndpointDescrizioneGET/api/libriRestituisce tutti i libri POST/api/libriAggiunge un nuovo libro DELETE/api/libri/<id>Elimina un libro specifico DELETE/api/libriElimina tutti i libri 
