@@ -18,33 +18,16 @@ GENERI = [
 
 def generate_books(n=20):
     global next_id
-    famous_books = [
-        {"titolo": "To Kill a Mockingbird", "autore": "Harper Lee", "anno": 1960, "genere": "Narrativa"},
-        {"titolo": "1984", "autore": "George Orwell", "anno": 1949, "genere": "Fantascienza"},
-        {"titolo": "The Great Gatsby", "autore": "F. Scott Fitzgerald", "anno": 1925, "genere": "Narrativa"},
-        {"titolo": "Pride and Prejudice", "autore": "Jane Austen", "anno": 1813, "genere": "Romantico"},
-        {"titolo": "The Catcher in the Rye", "autore": "J.D. Salinger", "anno": 1951, "genere": "Narrativa"},
-        {"titolo": "Harry Potter and the Philosopher's Stone", "autore": "J.K. Rowling", "anno": 1997, "genere": "Fantasy"},
-        {"titolo": "The Lord of the Rings", "autore": "J.R.R. Tolkien", "anno": 1954, "genere": "Fantasy"},
-        {"titolo": "The Hobbit", "autore": "J.R.R. Tolkien", "anno": 1937, "genere": "Fantasy"},
-        {"titolo": "Dune", "autore": "Frank Herbert", "anno": 1965, "genere": "Fantascienza"},
-        {"titolo": "The Chronicles of Narnia", "autore": "C.S. Lewis", "anno": 1950, "genere": "Fantasy"},
-        {"titolo": "Moby-Dick", "autore": "Herman Melville", "anno": 1851, "genere": "Narrativa"},
-        {"titolo": "War and Peace", "autore": "Leo Tolstoy", "anno": 1869, "genere": "Romanzo storico"},
-        {"titolo": "Crime and Punishment", "autore": "Fyodor Dostoevsky", "anno": 1866, "genere": "Giallo"},
-        {"titolo": "The Brothers Karamazov", "autore": "Fyodor Dostoevsky", "anno": 1880, "genere": "Narrativa"},
-        {"titolo": "Anna Karenina", "autore": "Leo Tolstoy", "anno": 1877, "genere": "Romantico"},
-        {"titolo": "The Picture of Dorian Gray", "autore": "Oscar Wilde", "anno": 1890, "genere": "Narrativa"},
-        {"titolo": "Dracula", "autore": "Bram Stoker", "anno": 1897, "genere": "Horror"},
-        {"titolo": "Frankenstein", "autore": "Mary Shelley", "anno": 1818, "genere": "Horror"},
-        {"titolo": "The Adventures of Huckleberry Finn", "autore": "Mark Twain", "anno": 1884, "genere": "Narrativa"},
-        {"titolo": "Ulysses", "autore": "James Joyce", "anno": 1922, "genere": "Narrativa"}
-    ]
     books = []
-    for book in famous_books[:n]:
-        book_with_id = book.copy()
-        book_with_id["id"] = next_id
-        books.append(book_with_id)
+    for _ in range(n):
+        book = {
+            "id": next_id,
+            "titolo": fake.sentence(nb_words=4).rstrip('.'),  # Generate a fake title-like sentence
+            "autore": fake.name(),
+            "anno": random.randint(1800, 2023),
+            "genere": random.choice(GENERI)
+        }
+        books.append(book)
         next_id += 1
     return books
 
