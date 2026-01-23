@@ -97,7 +97,7 @@ export default function App() {
     <div className="app">
       <header className="app-header">
         <h1>📚 Gestione Libreria</h1>
-        <p className="subtitle">React + Flask — CRUD Completo e Bello</p>
+        <p className="subtitle"></p>
       </header>
 
       <section className="controls">
@@ -155,7 +155,7 @@ export default function App() {
         )}
       </main>
 
-      <footer className="footer">📖 Progetto Libreria • React + Flask • Creato con ❤️</footer>
+      <footer className="footer">📖 Progetto Libreria • React + Flask </footer>
     </div>
   )
 }
