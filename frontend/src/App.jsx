@@ -13,6 +13,7 @@ export default function App() {
   const [form, setForm] = useState({ titolo: '', autore: '', anno: '', genere: '' })
   const [editing, setEditing] = useState(null)
   const [editForm, setEditForm] = useState({ titolo: '', autore: '', anno: '', genere: '' })
+  const [isDarkMode, setIsDarkMode] = useState(false)
 
   useEffect(() => { fetchLibri() }, [])
 
@@ -80,6 +81,10 @@ export default function App() {
     setSortBy('')
   }
 
+  function toggleTheme() {
+    setIsDarkMode(!isDarkMode)
+  }
+
   const genres = Array.from(new Set(libri.map(b => b.genere))).sort()
   const filtered = libri
     .filter(b =>
@@ -94,10 +99,13 @@ export default function App() {
     })
 
   return (
-    <div className="app">
+    <div className={`app ${isDarkMode ? 'dark' : ''}`}>
       <header className="app-header">
         <h1>📚 Gestione Libreria</h1>
-        <p className="subtitle"></p>
+        <p className="subtitle">React + Flask — CRUD Completo e Bello</p>
+        <button className="btn theme-toggle" onClick={toggleTheme}>
+          {isDarkMode ? '☀️' : '🌙'}
+        </button>
       </header>
 
       <section className="controls">
