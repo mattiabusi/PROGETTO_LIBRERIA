@@ -1,7 +1,7 @@
-📚 Sistema di Gestione Libreria
+##📚 Sistema di Gestione Libreria
 Questo progetto è una Web Application Full-Stack progettata per la gestione semplificata di un catalogo librario. L'applicazione permette di visualizzare, aggiungere ed eliminare libri, dimostrando l'integrazione tra un frontend moderno in React e un backend robusto in Flask tramite API REST.
 
-📑 Descrizione del Progetto
+##📑 Descrizione del Progetto
 L'applicazione è divisa in due componenti principali:
 
 
@@ -10,7 +10,7 @@ Backend (Flask): Gestisce i dati e fornisce le API per le operazioni CRUD (Creat
 
 Frontend (React): Interfaccia utente dinamica che permette la consultazione dei libri, il filtraggio in tempo reale e la gestione della collezione.
 
-🛠 Analisi dei Requisiti
+##🛠 Analisi dei Requisiti
 Requisiti Funzionali
 
 Visualizzazione: L'utente deve poter visualizzare l'elenco completo dei libri presenti nel sistema (Titolo, Autore, Anno, Genere).
@@ -37,7 +37,7 @@ Protocollo di Comunicazione: Utilizzo di standard REST per lo scambio dati in fo
 
 Versionamento: Codice sorgente gestito interamente tramite Git e caricato su GitHub.
 
-👤 User Stories
+##👤 User Stories
 
 Come Bibliotecario, voglio vedere una lista di libri pre-caricati all'avvio per testare subito le funzionalità del sistema.
 
@@ -47,7 +47,7 @@ Come Utente, voglio poter filtrare i libri per genere così da trovare rapidamen
 
 Come Amministratore, voglio poter eliminare un libro inserito per errore o svuotare la lista per aggiornare il catalogo.
 
-🚀 Tecnologie Utilizzate
+##🚀 Tecnologie Utilizzate
 
 Backend: Python, Flask, Faker (per la generazione dati).
 
@@ -57,5 +57,5 @@ Frontend: React (Vite), Axios (per le chiamate API), Hooks (useState, useEffect)
 
 Tooling: Git per il versionamento.
 
-📂 Struttura delle API 
+##📂 Struttura delle API 
 (Endpoint)MetodoEndpointDescrizioneGET/api/libriRestituisce tutti i libri POST/api/libriAggiunge un nuovo libro DELETE/api/libri/<id>Elimina un libro specifico DELETE/api/libriElimina tutti i libri 
