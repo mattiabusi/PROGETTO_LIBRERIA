@@ -57,4 +57,28 @@ Frontend: React (Vite), Hooks (useState, useEffect).
 
 Tooling: Git per il versionamento.
 
+## 📁 Struttura del Progetto
+
+```
+PROGETTO_LIBRERIA/
+├── README.md                 # Documentazione principale del progetto
+├── BE/                       # Backend dell'applicazione
+│   ├── main.py               # Server Flask con API REST
+│   ├── py/                   # Directory per moduli Python
+│   ├── pyproject.toml        # Configurazione del progetto Python
+│   └── README.md             # Documentazione del backend
+└── frontend/                 # Frontend dell'applicazione
+    ├── public/               # File statici pubblici
+    ├── src/                  # Codice sorgente React
+    │   ├── App.jsx           # Componente principale dell'app
+    │   ├── main.jsx          # Punto di ingresso dell'app
+    │   ├── index.css         # Stili globali
+    │   ├── App.css           # Stili del componente App
+    │   └── assets/           # Risorse statiche
+    ├── package.json          # Dipendenze e configurazione npm
+    ├── vite.config.js        # Configurazione Vite
+    ├── eslint.config.js      # Configurazione ESLint
+    └── README.md             # Documentazione del frontend
+```
+
 
