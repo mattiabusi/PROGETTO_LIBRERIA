@@ -26,3 +26,13 @@ Cancellazione Totale: Funzionalità per svuotare l'intera libreria con un singol
 
 
 Ricerca e Filtro: Sistema di filtraggio lato client per cercare libri per autore o per genere.
+
+Requisiti Non Funzionali
+
+Architettura: Separazione netta tra Client (Frontend) e Server (Backend).
+
+
+Protocollo di Comunicazione: Utilizzo di standard REST per lo scambio dati in formato JSON.
+
+
+Versionamento: Codice sorgente gestito interamente tramite Git e caricato su GitHub.
