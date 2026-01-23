@@ -102,7 +102,7 @@ export default function App() {
     <div className={`app ${isDarkMode ? 'dark' : ''}`}>
       <header className="app-header">
         <h1>📚 Gestione Libreria</h1>
-        <p className="subtitle">React + Flask — CRUD Completo e Bello</p>
+        
         <button className="btn theme-toggle" onClick={toggleTheme}>
           {isDarkMode ? '☀️' : '🌙'}
         </button>
