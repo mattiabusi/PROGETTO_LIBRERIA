@@ -80,5 +80,6 @@ PROGETTO_LIBRERIA/
     ├── eslint.config.js      # Configurazione ESLint
     └── README.md             # Documentazione del frontend
 ```
-
+## schermata del progetto
+<img width="1903" height="828" alt="image" src="https://github.com/user-attachments/assets/22b1e7fc-3610-4ec8-a8a2-b3c8a7215f0b" />
 
