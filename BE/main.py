@@ -42,7 +42,7 @@ libri = generate_books(20)
 # Endpoint GET: restituisce tutti i libri
 @app.route('/api/libri', methods=['GET'])
 def get_libri():
-    return jsonify(libri), 200
+    return jsonify(libri), 
 
 # Endpoint POST: aggiunge un nuovo libro
 @app.route('/api/libri', methods=['POST'])
@@ -56,13 +56,13 @@ def add_libro():
     
     # Valida che tutti i campi siano presenti
     if not titolo or not autore or not anno or not genere:
-        return jsonify({"error": "campi mancanti"}), 400
+        return jsonify({"error": "campi mancanti"}), 
     
     # Valida che l'anno sia numerico
     try:
         anno = int(anno)
     except (ValueError, TypeError):
-        return jsonify({"error": "anno non valido"}), 400
+        return jsonify({"error": "anno non valido"}), 
     
     # Crea il nuovo libro con ID auto-incrementante
     nuovo = {
@@ -75,15 +75,15 @@ def delete_libro(book_id):
     for b in libri:
         if b['id'] == book_id:
             libri = [x for x in libri if x['id'] != book_id]
-            return jsonify({"deleted": book_id}), 200
-    return jsonify({"error": "non trovato"}), 404
+            return jsonify({"deleted": book_id}), 
+    return jsonify({"error": "non trovato"}), 
 
 # Endpoint DELETE: elimina tutti i libri
 @app.route('/api/libri', methods=['DELETE'])
 def delete_all_libri():
     global libri
     libri = []
-    return jsonify({"deleted_all": True}), 200
+    return jsonify({"deleted_all": True}), 
 
 # Endpoint PUT: modifica un libro esistente
 @app.route('/api/libri/<int:book_id>', methods=['PUT'])
@@ -96,27 +96,27 @@ def update_libro(book_id):
     
     # Valida i campi
     if not titolo or not autore or not anno or not genere:
-        return jsonify({"error": "campi mancanti"}), 400
+        return jsonify({"error": "campi mancanti"}), 
     
     try:
         anno = int(anno)
     except (ValueError, TypeError):
-        return jsonify({"error": "anno non valido"}), 400
+        return jsonify({"error": "anno non valido"}), 
     
     # Trova e aggiorna il libro
     anno = data.get('anno')
     genere = data.get('genere')
     if not titolo or not autore or not anno or not genere:
-        return jsonify({"error": "campi mancanti"}), 400
+        return jsonify({"error": "campi mancanti"}), 
     try:
         anno = int(anno)
     except (ValueError, TypeError):
-        return jsonify({"error": "anno non valido"}), 400
+        return jsonify({"error": "anno non valido"}), 
     for b in libri:
         if b['id'] == book_id:
             b.update({"titolo": titolo, "autore": autore, "anno": anno, "genere": genere})
-            return jsonify(b), 200
-    return jsonify({"error": "non trovato"}), 404
+            return jsonify(b), 
+    return jsonify({"error": "non trovato"}), 
 
 if __name__ == '__main__':
     app.run(debug=True)
